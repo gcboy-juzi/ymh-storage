@@ -16,7 +16,7 @@ f<template>
         <!-- 手机号 -->
         <el-form-item label="" prop="phone">
           <el-input
-            placeholder="请输入手机号"
+            placeholder="请输入用户名"
             prefix-icon="el-icon-user"
             class="phone-input"
             v-model="loginForm.phone"
@@ -115,31 +115,31 @@ export default {
       }
     };
     // 校验 邮箱
-    const checkEmail = (rules, value, callback) => {
-      // value是值
-      if (!value) {
-        callback(new Error("邮箱不能为空"));
-      } else {
-        // 格式验证
-        const reg = /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
-        // 验证
-        if (reg.test(value)) {
-          // 对的
-          callback();
-        } else {
-          // 错误
-          callback(new Error("邮箱格式不对哦"));
-        }
-      }
-    };
+    // const checkEmail = (rules, value, callback) => {
+    //   // value是值
+    //   if (!value) {
+    //     callback(new Error("邮箱不能为空"));
+    //   } else {
+    //     // 格式验证
+    //     const reg = /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
+    //     // 验证
+    //     if (reg.test(value)) {
+    //       // 对的
+    //       callback();
+    //     } else {
+    //       // 错误
+    //       callback(new Error("邮箱格式不对哦"));
+    //     }
+    //   }
+    // };
 
     return {
       // 登录表单数据
       loginForm: {
         // 手机号
-        phone: "18888888888",
+        phone: "lincheng",
         // 密码
-        password: "88888888",
+        password: "960526",
         // 验证码
         // captcha: ""
       },
@@ -148,7 +148,7 @@ export default {
         phone: [{ validator: checkPhone }],
         password: [
           { required: true, message: "密码不能为空" },
-          { min: 6, max: 12, message: "密码的强度不够" }
+          // { min: 6, max: 12, message: "密码的强度不够" }
         ],
         // captcha: [
         //   { required: true, message: "验证码不能为空" },
@@ -156,36 +156,36 @@ export default {
         // ]
       },
       // 验证码地址
-      captchaSrc: `${process.env.VUE_APP_BASEURL}/captcha?type=login`,
+      // captchaSrc: `${process.env.VUE_APP_BASEURL}/captcha?type=login`,
       // 是否勾选
-      checked: true,
+      // checked: true,
       // 是否显示注册框
       // showReg: false,
       // 注册表单数据
-      registerForm: {
-        name: "",
-        phone: "",
-        email: "",
-        // 用户头像
-        avatar: "",
-        password: "",
-        // 短信验证码
-        rcode: "",
-        // 图形验证码
-        // code: ""
-      },
+      // registerForm: {
+      //   name: "",
+      //   phone: "",
+      //   email: "",
+      //   // 用户头像
+      //   avatar: "",
+      //   password: "",
+      //   // 短信验证码
+      //   rcode: "",
+      //   // 图形验证码
+      //   // code: ""
+      // },
       // 注册表单验证规则
-      registerRules: {
-        // 姓名
-        name: [{ required: true, message: "姓名不能为空哦", trigger: "blur" }],
-        // 邮箱
-        email: [
-          {
-            required: true,
-            validator: checkEmail
-          }
-        ]
-      },
+      // registerRules: {
+      //   // 姓名
+      //   name: [{ required: true, message: "姓名不能为空哦", trigger: "blur" }],
+      //   // 邮箱
+      //   email: [
+      //     {
+      //       required: true,
+      //       validator: checkEmail
+      //     }
+      //   ]
+      // },
       // 文字宽度
       formLabelWidth: "67px",
       // 图片地址
@@ -265,14 +265,14 @@ export default {
     resetForm(form) {
             this.$refs[form].resetFields();
         },
-    changeCaptcha() {
-      // 修改值即可
-      // 很有可能重复
-      // this.captchaSrc = `http://183.237.67.218:3002/captcha?type=login&${Math.random()}`;
-      // 绝对不会重复
-      this.captchaSrc = `${process.env.VUE_APP_BASEURL}/captcha?type=login&${Date.now()}`;
-      // this.captchaSrc = `http://183.237.67.218:3002/captcha?type=login`
-    },
+    // changeCaptcha() {
+    //   // 修改值即可
+    //   // 很有可能重复
+    //   // this.captchaSrc = `http://183.237.67.218:3002/captcha?type=login&${Math.random()}`;
+    //   // 绝对不会重复
+    //   this.captchaSrc = `${process.env.VUE_APP_BASEURL}/captcha?type=login&${Date.now()}`;
+    //   // this.captchaSrc = `http://183.237.67.218:3002/captcha?type=login`
+    // },
     // 图片上传的方法
     // res 服务器返回的值
     // file 文件信息
@@ -405,8 +405,8 @@ export default {
     rgba(20, 147, 250, 1)
   );
   .form-wrapper {
-    width: 478px;
-    height: 550px;
+    width: 480px;
+    height: 400px;
     background-color: #f5f5f5;
     padding-top: 48px;
     padding-left: 43px;
@@ -451,9 +451,9 @@ export default {
     // 按钮
     .login-btn,
     .reg-btn {
-      width: 100%;
-      margin-left: 0;
-      margin-top: 27px;
+      width: 40%;
+      margin-left: 25px;
+      margin-top: 30px;
     }
   }
 

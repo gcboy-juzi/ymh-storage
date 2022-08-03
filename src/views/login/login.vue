@@ -225,9 +225,9 @@ export default {
       // 登录表单数据
       loginForm: {
         // 手机号
-        phone: "",
+        phone: "18888888888",
         // 密码
-        password: "",
+        password: "88888888",
         // 验证码
         captcha: ""
       },

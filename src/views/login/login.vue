@@ -4,10 +4,7 @@ f<template>
     <div class="form-wrapper">
       <!-- 标题 -->
       <div class="title-box">
-        <img class="login-logo" src="../../assets/login_icon.png" alt="" />
-        <span class="title">黑马面面</span>
-        <span class="line"></span>
-        <span class="sub-title">用户登录</span>
+        <span class="title">巴西物流专线系统</span>
       </div>
       <!-- 表单 -->
       <el-form
@@ -37,7 +34,7 @@ f<template>
           </el-input>
         </el-form-item>
         <!-- 验证码 -->
-        <el-form-item label="" prop="captcha">
+        <!-- <el-form-item label="" prop="captcha">
           <el-row class="captcha-row">
             <el-col :span="17">
               <el-input
@@ -59,13 +56,13 @@ f<template>
           </el-row>
         </el-form-item>
 
-        <!-- 协议 -->
+        协议
         <el-checkbox class="checkbox" v-model="checked">
           我已阅读并同意
           <el-link type="primary">用户协议</el-link>
           和
           <el-link type="primary">隐私条款</el-link>
-        </el-checkbox>
+        </el-checkbox> -->
         <!-- 登录 注册按钮 -->
         <el-button
           class="login-btn"
@@ -73,99 +70,14 @@ f<template>
           @click="submitForm('loginForm')"
           >登录</el-button
         >
-        <!-- 注册按钮 -->
-        <el-button class="reg-btn" @click="showReg = true" type="primary"
-          >注册</el-button
+        <!-- 重置按钮 -->
+        <el-button class="reg-btn" @click="resetForm('form')" type="primary"
+          >重置</el-button
         >
       </el-form>
     </div>
     <!-- 右侧 图片 -->
     <img src="../../assets/login_banner_ele.png" alt="" class="banner" />
-
-    <!-- 注册对话框 -->
-    <el-dialog title="用户注册" class="reg-dialog" :visible.sync="showReg">
-      <!-- 表单 -->
-      <el-form :model="registerForm" :rules="registerRules" ref="registerForm">
-        <!-- 头像 -->
-        <el-form-item label="头像" :label-width="formLabelWidth">
-          <el-upload
-            class="avatar-uploader"
-            :action="action"
-            name="image"
-            :show-file-list="false"
-            :on-success="handleAvatarSuccess"
-            :before-upload="beforeAvatarUpload"
-          >
-            <img v-if="imageUrl" :src="imageUrl" class="avatar" />
-            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-          </el-upload>
-        </el-form-item>
-        <!-- 昵称 -->
-        <el-form-item label="昵称" :label-width="formLabelWidth" prop="name">
-          <el-input v-model="registerForm.name" autocomplete="off"></el-input>
-        </el-form-item>
-        <!-- 邮箱 -->
-        <el-form-item label="邮箱" :label-width="formLabelWidth" prop="email">
-          <el-input v-model="registerForm.email" autocomplete="off"></el-input>
-        </el-form-item>
-        <!-- 手机 -->
-        <el-form-item label="手机" :label-width="formLabelWidth">
-          <el-input v-model="registerForm.phone" autocomplete="off"></el-input>
-        </el-form-item>
-        <!-- 密码 -->
-        <el-form-item label="密码" :label-width="formLabelWidth">
-          <el-input
-            v-model="registerForm.password"
-            autocomplete="off"
-          ></el-input>
-        </el-form-item>
-        <!-- 图形码 -->
-        <el-form-item label="图形码" :label-width="formLabelWidth">
-          <el-row>
-            <el-col :span="16">
-              <el-input
-                v-model="registerForm.code"
-                autocomplete="off"
-              ></el-input>
-            </el-col>
-            <el-col :span="7" :offset="1">
-              <!-- 图形验证码 -->
-              <img
-                class="captcha"
-                @click="changeRegCaptcha"
-                :src="regCaptcha"
-                alt=""
-              />
-            </el-col>
-          </el-row>
-        </el-form-item>
-        <!-- 验证码 -->
-        <el-form-item label="验证码" :label-width="formLabelWidth">
-          <el-row>
-            <el-col :span="16">
-              <el-input
-                v-model="registerForm.rcode"
-                autocomplete="off"
-              ></el-input>
-            </el-col>
-            <el-col :span="7" :offset="1">
-              <!-- 获取手机验证码 -->
-              <el-button
-                class="captcha-btn"
-                @click="getMessage"
-                type="primary"
-                :disabled="isDisabled"
-                >{{ btnTxt }}</el-button
-              >
-            </el-col>
-          </el-row>
-        </el-form-item>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="showReg = false">取 消</el-button>
-        <el-button type="primary" @click="registerUser">确 定</el-button>
-      </div>
-    </el-dialog>
   </div>
 </template>
 
@@ -190,7 +102,7 @@ export default {
       if (!value) {
         callback(new Error("手机号不能为空"));
       } else {
-        // 格式验证
+        // 正则格式验证
         const reg = /^(0|86|17951)?(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57])[0-9]{8}$/;
         // 验证
         if (reg.test(value)) {
@@ -229,7 +141,7 @@ export default {
         // 密码
         password: "88888888",
         // 验证码
-        captcha: ""
+        // captcha: ""
       },
       // 登录验证规则
       loginRules: {
@@ -238,17 +150,17 @@ export default {
           { required: true, message: "密码不能为空" },
           { min: 6, max: 12, message: "密码的强度不够" }
         ],
-        captcha: [
-          { required: true, message: "验证码不能为空" },
-          { min: 4, max: 4, message: "验证码只有4位哦，不要写错了噢" }
-        ]
+        // captcha: [
+        //   { required: true, message: "验证码不能为空" },
+        //   { min: 4, max: 4, message: "验证码只有4位哦，不要写错了噢" }
+        // ]
       },
       // 验证码地址
       captchaSrc: `${process.env.VUE_APP_BASEURL}/captcha?type=login`,
       // 是否勾选
       checked: true,
       // 是否显示注册框
-      showReg: false,
+      // showReg: false,
       // 注册表单数据
       registerForm: {
         name: "",
@@ -260,7 +172,7 @@ export default {
         // 短信验证码
         rcode: "",
         // 图形验证码
-        code: ""
+        // code: ""
       },
       // 注册表单验证规则
       registerRules: {
@@ -297,10 +209,10 @@ export default {
     // 点击登录
     submitForm(formName) {
       // 布尔判断 如果为false
-      if (!this.checked) {
-        this.$message.warning("未勾选用户协议，必须要勾！！！");
-        return;
-      }
+      // if (!this.checked) {
+      //   this.$message.warning("未勾选用户协议，必须要勾！！！");
+      //   return;
+      // }
       // this.$refs['ruleForm']==> 获取饿了么的表单
       // 饿了么的表单.validate()
       this.$refs[formName].validate(valid => {
@@ -322,7 +234,7 @@ export default {
           login({
             phone: this.loginForm.phone,
             password: this.loginForm.password,
-            code: this.loginForm.captcha
+            // code: this.loginForm.captcha
           }).then(res => {
             if (res.data.code === 200) {
               // 成功
@@ -349,6 +261,10 @@ export default {
         }
       });
     },
+    // 点击重置
+    resetForm(form) {
+            this.$refs[form].resetFields();
+        },
     changeCaptcha() {
       // 修改值即可
       // 很有可能重复
@@ -481,7 +397,7 @@ export default {
   /* 上下居中 */
   align-items: center;
   /* 水平方向的对其方式 */
-  justify-content: space-around;
+  justify-content: center;
   height: 100%;
   background: linear-gradient(
     225deg,
@@ -499,23 +415,10 @@ export default {
     .title-box {
       display: flex;
       align-items: center;
-      .login-logo {
-        width: 22px;
-        height: 17px;
-        margin-right: 14px;
-      }
+      justify-content: center;
       .title {
         font-size: 24px;
         margin-right: 14px;
-      }
-      .line {
-        width: 1px;
-        height: 28px;
-        background: rgba(199, 199, 199, 1);
-        margin-right: 12px;
-      }
-      .sub-title {
-        font-size: 22px;
       }
     }
     .phone-input {

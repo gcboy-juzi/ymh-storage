@@ -14,12 +14,12 @@ f<template>
         status-icon
       >
         <!-- 手机号 -->
-        <el-form-item label="" prop="phone">
+        <el-form-item label="" prop="username">
           <el-input
-            placeholder="请输入手机号"
+            placeholder="请输入用户名"
             prefix-icon="el-icon-user"
             class="phone-input"
-            v-model="loginForm.phone"
+            v-model="loginForm.username"
           >
           </el-input>
         </el-form-item>
@@ -77,7 +77,7 @@ f<template>
       </el-form>
     </div>
     <!-- 右侧 图片 -->
-    <img src="../../assets/login_banner_ele.png" alt="" class="banner" />
+    <!-- <img src="../../assets/login_banner_ele.png" alt="" class="banner" /> -->
   </div>
 </template>
 
@@ -87,7 +87,7 @@ f<template>
 // import axios from "axios";
 
 // 导入抽取的api 方法
-import { login, register, sendsms } from "../../api/api.js";
+import { login } from "../../api/api.js";
 
 // 导入 抽取的token 方法
 import {setToken} from '../../utils/token.js'
@@ -97,58 +97,58 @@ export default {
   // 数据
   data() {
     // 定义校验的规则
-    const checkPhone = (rules, value, callback) => {
-      // value是值
-      if (!value) {
-        callback(new Error("手机号不能为空"));
-      } else {
-        // 正则格式验证
-        const reg = /^(0|86|17951)?(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57])[0-9]{8}$/;
-        // 验证
-        if (reg.test(value)) {
-          // 对的
-          callback();
-        } else {
-          // 错误
-          callback(new Error("手机号格式不对哦"));
-        }
-      }
-    };
+    // const checkPhone = (rules, value, callback) => {
+    //   // value是值
+    //   if (!value) {
+    //     callback(new Error("手机号不能为空"));
+    //   } else {
+    //     // 正则格式验证
+    //     const reg = /^(0|86|17951)?(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57])[0-9]{8}$/;
+    //     // 验证
+    //     if (reg.test(value)) {
+    //       // 对的
+    //       callback();
+    //     } else {
+    //       // 错误
+    //       callback(new Error("手机号格式不对哦"));
+    //     }
+    //   }
+    // };
     // 校验 邮箱
-    const checkEmail = (rules, value, callback) => {
-      // value是值
-      if (!value) {
-        callback(new Error("邮箱不能为空"));
-      } else {
-        // 格式验证
-        const reg = /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
-        // 验证
-        if (reg.test(value)) {
-          // 对的
-          callback();
-        } else {
-          // 错误
-          callback(new Error("邮箱格式不对哦"));
-        }
-      }
-    };
+    // const checkEmail = (rules, value, callback) => {
+    //   // value是值
+    //   if (!value) {
+    //     callback(new Error("邮箱不能为空"));
+    //   } else {
+    //     // 格式验证
+    //     const reg = /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
+    //     // 验证
+    //     if (reg.test(value)) {
+    //       // 对的
+    //       callback();
+    //     } else {
+    //       // 错误
+    //       callback(new Error("邮箱格式不对哦"));
+    //     }
+    //   }
+    // };
 
     return {
       // 登录表单数据
       loginForm: {
         // 手机号
-        phone: "18888888888",
+        username: "lincheng",
         // 密码
-        password: "88888888",
+        password: "960526",
         // 验证码
         // captcha: ""
       },
       // 登录验证规则
       loginRules: {
-        phone: [{ validator: checkPhone }],
+        username: [{ required: true, message: "用户名不能为空" }],
         password: [
           { required: true, message: "密码不能为空" },
-          { min: 6, max: 12, message: "密码的强度不够" }
+          // { min: 6, max: 12, message: "密码的强度不够" }
         ],
         // captcha: [
         //   { required: true, message: "验证码不能为空" },
@@ -156,48 +156,48 @@ export default {
         // ]
       },
       // 验证码地址
-      captchaSrc: `${process.env.VUE_APP_BASEURL}/captcha?type=login`,
+      // captchaSrc: `${process.env.VUE_APP_BASEURL}/captcha?type=login`,
       // 是否勾选
-      checked: true,
+      // checked: true,
       // 是否显示注册框
       // showReg: false,
       // 注册表单数据
-      registerForm: {
-        name: "",
-        phone: "",
-        email: "",
-        // 用户头像
-        avatar: "",
-        password: "",
-        // 短信验证码
-        rcode: "",
-        // 图形验证码
-        // code: ""
-      },
+      // registerForm: {
+      //   name: "",
+      //   phone: "",
+      //   email: "",
+      //   // 用户头像
+      //   avatar: "",
+      //   password: "",
+      //   // 短信验证码
+      //   rcode: "",
+      //   // 图形验证码
+      //   // code: ""
+      // },
       // 注册表单验证规则
-      registerRules: {
-        // 姓名
-        name: [{ required: true, message: "姓名不能为空哦", trigger: "blur" }],
-        // 邮箱
-        email: [
-          {
-            required: true,
-            validator: checkEmail
-          }
-        ]
-      },
+      // registerRules: {
+      //   // 姓名
+      //   name: [{ required: true, message: "姓名不能为空哦", trigger: "blur" }],
+      //   // 邮箱
+      //   email: [
+      //     {
+      //       required: true,
+      //       validator: checkEmail
+      //     }
+      //   ]
+      // },
       // 文字宽度
       formLabelWidth: "67px",
       // 图片地址
-      imageUrl: "",
+      // imageUrl: "",
       // 注册图形验证码 地址
-      regCaptcha: `${process.env.VUE_APP_BASEURL}/captcha?type=sendsms`,
-      // 短信验证码按钮文本
-      btnTxt: "获取短信验证码",
+      // regCaptcha: `${process.env.VUE_APP_BASEURL}/captcha?type=sendsms`,
+      // 注册短信验证码按钮文本
+      // btnTxt: "获取短信验证码",
       // 按钮是否禁用
-      isDisabled: false,
+      // isDisabled: false,
       // 文件上传地址
-      action:process.env.VUE_APP_BASEURL+'/uploads'
+      // action:process.env.VUE_APP_BASEURL+'/uploads'
     };
   },
   // 方法
@@ -232,21 +232,21 @@ export default {
           // })
 
           login({
-            phone: this.loginForm.phone,
+            username: this.loginForm.username,
             password: this.loginForm.password,
             // code: this.loginForm.captcha
           }).then(res => {
-            if (res.data.code === 200) {
+            if (res.data.success == true) {
               // 成功
               this.$message.success("你可算回来啦！");
             
               // 保存凭证
-              // window.localStorage.setItem('mmtoken',res.data.data.token)
+              window.localStorage.setItem('mmtoken',res.data.content.userId)
               // 调用工具函数 保存token
-              setToken(res.data.data.token)
-              // window.console.log(res);
+              setToken(res.data.content.userId)
+              window.console.log(res);
               // 保存用户信息 到仓库中
-              this.$store.commit("CHANGEINFO",res.data.data);
+              this.$store.commit("CHANGEINFO",res.data.content);
                 // 跳转
               this.$router.push('/index');
             } else {
@@ -265,54 +265,55 @@ export default {
     resetForm(form) {
             this.$refs[form].resetFields();
         },
-    changeCaptcha() {
-      // 修改值即可
-      // 很有可能重复
-      // this.captchaSrc = `http://183.237.67.218:3002/captcha?type=login&${Math.random()}`;
-      // 绝对不会重复
-      this.captchaSrc = `${process.env.VUE_APP_BASEURL}/captcha?type=login&${Date.now()}`;
-      // this.captchaSrc = `http://183.237.67.218:3002/captcha?type=login`
-    },
+    // changeCaptcha() {
+    //   // 修改值即可
+    //   // 很有可能重复
+    //   // this.captchaSrc = `http://183.237.67.218:3002/captcha?type=login&${Math.random()}`;
+    //   // 绝对不会重复
+    //   this.captchaSrc = `${process.env.VUE_APP_BASEURL}/captcha?type=login&${Date.now()}`;
+    //   // this.captchaSrc = `http://183.237.67.218:3002/captcha?type=login`
+    // },
     // 图片上传的方法
     // res 服务器返回的值
     // file 文件信息
-    handleAvatarSuccess(res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw);
-      // window.console.log(res);
-      // 保存到表单中
-      this.registerForm.avatar = res.data.file_path;
-    },
+    // handleAvatarSuccess(res, file) {
+    //   this.imageUrl = URL.createObjectURL(file.raw);
+    //   // window.console.log(res);
+    //   // 保存到表单中
+    //   this.registerForm.avatar = res.data.file_path;
+    // },
     // 文件上传之前对文件做一些限制
-    beforeAvatarUpload(file) {
-      const isJPG = file.type === "image/jpeg";
-      const isLt2M = file.size / 1024 / 1024 < 2;
+    // beforeAvatarUpload(file) {
+    //   const isJPG = file.type === "image/jpeg";
+    //   const isLt2M = file.size / 1024 / 1024 < 2;
 
-      if (!isJPG) {
-        this.$message.error("上传头像图片只能是 JPG 格式!");
-      }
-      if (!isLt2M) {
-        this.$message.error("上传头像图片大小不能超过 2MB!");
-      }
-      return isJPG && isLt2M;
-    },
+    //   if (!isJPG) {
+    //     this.$message.error("上传头像图片只能是 JPG 格式!");
+    //   }
+    //   if (!isLt2M) {
+    //     this.$message.error("上传头像图片大小不能超过 2MB!");
+    //   }
+    //   return isJPG && isLt2M;
+    // },
+  
     // 重新获取注册 图形验证码
-    changeRegCaptcha() {
-      // 修改地址
-      this.regCaptcha = `${process.env.VUE_APP_BASEURL}/captcha?type=sendsms&${Date.now()}`;
-    },
+    // changeRegCaptcha() {
+    //   // 修改地址
+    //   this.regCaptcha = `${process.env.VUE_APP_BASEURL}/captcha?type=sendsms&${Date.now()}`;
+    // },
     // 获取短信验证码
-    getMessage() {
-      // 非空判断
-      if (this.registerForm.phone.trim() == "") {
-        this.$message.warning("哥们，你的手机号呢！滑稽");
-        return;
-      }
-      // 格式判断
-      const reg = /^(0|86|17951)?(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57])[0-9]{8}$/;
-      if (!reg.test(this.registerForm.phone)) {
-        this.$message.warning("老铁,你的手机是不是写错了呀！");
-        return;
-      }
+    // getMessage() {
+    //   // 非空判断
+    //   if (this.registerForm.phone.trim() == "") {
+    //     this.$message.warning("哥们，你的手机号呢！滑稽");
+    //     return;
+    //   }
+    //   // 格式判断
+    //   const reg = /^(0|86|17951)?(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57])[0-9]{8}$/;
+    //   if (!reg.test(this.registerForm.phone)) {
+    //     this.$message.warning("老铁,你的手机是不是写错了呀！");
+    //     return;
+    //   }
       // 说明 格式 内容都有
       // axios({
       //   url: "http://183.237.67.218:3002/sendsms",
@@ -325,67 +326,67 @@ export default {
       //   withCredentials: true
       // })
 
-      sendsms({
-        code: this.registerForm.code,
-        phone: this.registerForm.phone
-      }).then(res => {
-        window.console.log(res);
-      });
+    //   sendsms({
+    //     code: this.registerForm.code,
+    //     phone: this.registerForm.phone
+    //   }).then(res => {
+    //     window.console.log(res);
+    //   });
 
-      let time = 60;
-      // 禁用按钮 开启定时器
-      this.isDisabled = true;
-      const interId = setInterval(() => {
-        // 递减
-        time--;
-        // 修改页面
-        this.btnTxt = `${time}S后再次获取`;
-        if (time == 0) {
-          clearInterval(interId);
-          // 重新启用按钮
-          this.isDisabled = false;
-          // 还原文本
-          this.btnTxt = "获取短信验证码";
-        }
-      }, 100);
-    },
+    //   let time = 60;
+    //   // 禁用按钮 开启定时器
+    //   this.isDisabled = true;
+    //   const interId = setInterval(() => {
+    //     // 递减
+    //     time--;
+    //     // 修改页面
+    //     this.btnTxt = `${time}S后再次获取`;
+    //     if (time == 0) {
+    //       clearInterval(interId);
+    //       // 重新启用按钮
+    //       this.isDisabled = false;
+    //       // 还原文本
+    //       this.btnTxt = "获取短信验证码";
+    //     }
+    //   }, 100);
+    // },
     // 用户注册
-    registerUser() {
-      // this.$refs['ruleForm']==> 获取饿了么的表单
-      // 饿了么的表单.validate()
-      this.$refs.registerForm.validate(valid => {
-        if (valid) {
-          // window.alert("ok1");
-          // axios({
-          //   url: "http://183.237.67.218:3002/register",
-          //   method: "post",
-          //   data: {
-          //     avatar: this.registerForm.avatar,
-          //     email: this.registerForm.email,
-          //     name: this.registerForm.name,
-          //     password: this.registerForm.password,
-          //     phone: this.registerForm.phone,
-          //     rcode: this.registerForm.rcode
-          //   },
-          //   withCredentials: true
-          // })
-          register({
-            avatar: this.registerForm.avatar,
-            email: this.registerForm.email,
-            name: this.registerForm.name,
-            password: this.registerForm.password,
-            phone: this.registerForm.phone,
-            rcode: this.registerForm.rcode
-          }).then(res => {
-            window.console.log(res);
-          });
-        } else {
-          // 验证失败
-          window.console.log("error submit!!");
-          return false;
-        }
-      });
-    }
+    // registerUser() {
+    //   // this.$refs['ruleForm']==> 获取饿了么的表单
+    //   // 饿了么的表单.validate()
+    //   this.$refs.registerForm.validate(valid => {
+    //     if (valid) {
+    //       // window.alert("ok1");
+    //       // axios({
+    //       //   url: "http://183.237.67.218:3002/register",
+    //       //   method: "post",
+    //       //   data: {
+    //       //     avatar: this.registerForm.avatar,
+    //       //     email: this.registerForm.email,
+    //       //     name: this.registerForm.name,
+    //       //     password: this.registerForm.password,
+    //       //     phone: this.registerForm.phone,
+    //       //     rcode: this.registerForm.rcode
+    //       //   },
+    //       //   withCredentials: true
+    //       // })
+    //       register({
+    //         avatar: this.registerForm.avatar,
+    //         email: this.registerForm.email,
+    //         name: this.registerForm.name,
+    //         password: this.registerForm.password,
+    //         phone: this.registerForm.phone,
+    //         rcode: this.registerForm.rcode
+    //       }).then(res => {
+    //         window.console.log(res);
+    //       });
+    //     } else {
+    //       // 验证失败
+    //       window.console.log("error submit!!");
+    //       return false;
+    //     }
+    //   });
+    // }
   }
 };
 </script>
@@ -405,8 +406,8 @@ export default {
     rgba(20, 147, 250, 1)
   );
   .form-wrapper {
-    width: 478px;
-    height: 550px;
+    width: 480px;
+    height: 400px;
     background-color: #f5f5f5;
     padding-top: 48px;
     padding-left: 43px;
@@ -451,9 +452,9 @@ export default {
     // 按钮
     .login-btn,
     .reg-btn {
-      width: 100%;
-      margin-left: 0;
-      margin-top: 27px;
+      width: 40%;
+      margin-left: 25px;
+      margin-top: 30px;
     }
   }
 

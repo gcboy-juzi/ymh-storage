@@ -14,8 +14,8 @@ import router from "../router/router.js";
 
 // 统一设置 基地址
 // axios.defaults.baseURL = "http://183.237.67.218:3002";
-// axios.defaults.baseURL = "http://127.0.0.1/heimamm/public";
-axios.defaults.baseURL = process.env.VUE_APP_BASEURL;
+axios.defaults.baseURL = "http://43.132.153.130:8889/ymh-ems-test";
+// axios.defaults.baseURL = process.env.VUE_APP_BASEURL;
 // 统一设置 跨域携带cookie
 axios.defaults.withCredentials = true;
 
@@ -66,9 +66,17 @@ axios.interceptors.response.use(
 );
 
 // 暴露出去 有名字的暴露 名字一般和接口地址一样
+// export function login(data) {
+//   return axios({
+//     url: "/login",
+//     method: "post",
+//     data
+//   });
+// }
+// 新登录接口
 export function login(data) {
   return axios({
-    url: "/login",
+    url: "/login/loginIn",
     method: "post",
     data
   });

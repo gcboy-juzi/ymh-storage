@@ -4,21 +4,14 @@
     <el-header class="header">
       <div class="left">
         <!-- 顶部的图标，点击旋转 -->
-        <i
-          class="el-icon-s-fold"
-          @click="isCollapse = !isCollapse"
-          :class="{ rotate: isCollapse }"
-        ></i>
+        <i class="el-icon-s-fold" @click="isCollapse = !isCollapse" :class="{ rotate: isCollapse }"></i>
         <img class="logo" src="../../assets/index-logo.png" alt="" />
         <span class="title">黑马面面</span>
       </div>
       <div class="right">
-        <!-- 头像 -->
-        <img class="avatar" :src="getIcon" alt="" />
+        <!-- <img class="avatar" :src="getIcon" alt="" /> -->
         <span class="name">{{ getName }},您好</span>
-        <el-button class="logout" @click="logout" size="mini" type="primary"
-          >退出</el-button
-        >
+        <el-button class="logout" @click="logout" size="mini" type="primary">退出</el-button>
       </div>
     </el-header>
     <el-container>
@@ -26,7 +19,8 @@
          style="width:auto" 让宽度自适应 被内容撑开
        -->
       <el-aside style="width:auto" class="aside">
-        <el-menu
+        <!-- 注释原菜单栏 -->
+        <!-- <el-menu
           :collapse="isCollapse"
           default-active="5"
           class="el-menu-vertical-demo"
@@ -48,11 +42,77 @@
             <i class="el-icon-office-building"></i>
             <span slot="title">企业列表</span>
           </el-menu-item>
+          
           <el-menu-item v-if="['管理员','老师','学生'].includes(getRole)" index="/index/subject">
             <i class="el-icon-notebook-2"></i>
             <span slot="title">学科列表</span>
           </el-menu-item>
+        </el-menu> -->
+        <!-- ymh菜单栏 -->
+        <el-menu default-active="1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
+          <el-submenu index="1">
+            <template slot="title">
+              <span>会员管理</span>
+            </template>
+            <el-submenu index="2">
+              <template slot="title">
+                <span>会员管理123</span>
+              </template>
+              <!-- <el-menu-item index="1-1">会员档案</el-menu-item> -->
+            </el-submenu>
+            <el-menu-item index="1-1">会员档案</el-menu-item>
+            <el-menu-item index="1-2">体检上传</el-menu-item>
+            <el-menu-item index="1-3">会员统计</el-menu-item>
+          </el-submenu>
+          <el-submenu index="2">
+            <template slot="title">
+              <span>预约管理</span>
+            </template>
+            <el-menu-item index="2-1">预约列表</el-menu-item>
+            <el-menu-item index="2-2">预约设置</el-menu-item>
+            <el-menu-item index="2-3">套餐管理</el-menu-item>
+            <el-menu-item index="2-4">检查组管理</el-menu-item>
+            <el-menu-item index="2-5">检查项管理</el-menu-item>
+          </el-submenu>
+          <el-submenu index="3">
+            <template slot="title">
+              <span>健康评估</span>
+            </template>
+            <el-menu-item index="3-1">中医体质辨识</el-menu-item>
+          </el-submenu>
+          <el-submenu index="4">
+            <template slot="title">
+              <span>统计分析</span>
+            </template>
+            <el-menu-item index="4-1">会员数量</el-menu-item>
+            <el-menu-item index="4-2">套餐占比</el-menu-item>
+            <el-menu-item index="4-3">运营数据</el-menu-item>
+            <el-menu-item index="4-4">会员年龄占比饼形图</el-menu-item>
+            <el-menu-item index="4-5">会员性别占比饼形图</el-menu-item>
+          </el-submenu>
+          <el-submenu index="5">
+            <template slot="title">
+              <span>系统设置</span>
+            </template>
+            <el-menu-item index="5-1">菜单管理</el-menu-item>
+            <el-menu-item index="5-2">权限管理</el-menu-item>
+            <el-menu-item index="5-3">角色管理</el-menu-item>
+            <el-menu-item index="5-4">用户管理</el-menu-item>
+          </el-submenu>
+          <el-submenu index="6">
+            <template slot="title">会员图表</template>
+            <el-submenu index="6-1">
+              <template slot="title">选项4</template>
+              <el-submenu index="6-1-1">
+                <template slot="title">选项6</template>
+                <el-menu-item index="6-1-1-1">选项1</el-menu-item>
+              </el-submenu>
+            </el-submenu>
+
+          </el-submenu>
+
         </el-menu>
+
       </el-aside>
       <!-- 主体区域 -->
       <el-main class="main">
@@ -64,9 +124,9 @@
 
 <script>
 // 导入 获取token的函数
-import {removeToken } from "../../utils/token.js";
+import { removeToken } from "../../utils/token.js";
 // 导入 用户信息方法
-// import {userInfo} from '../../api/api.js';
+// import {userInfo} from '../../api/api.js';5
 export default {
   name: "index",
   data() {
@@ -74,9 +134,9 @@ export default {
       // 是否折叠
       isCollapse: false,
       // 头像地址
-      avatar :"",
+      avatar: "",
       // 用户名
-      name:""
+      name: ""
     };
   },
   // 生命周期钩子
@@ -118,12 +178,12 @@ export default {
         type: "error"
       })
         .then(() => {
-            // 删除token
-            removeToken();
-            // 删除仓库的数据即可
-            this.$store.commit("CHANGEINFO",undefined);
-            // 去登录页
-            this.$router.push('/login');
+          // 删除token
+          removeToken();
+          // 删除仓库的数据即可
+          this.$store.commit("CHANGEINFO", undefined);
+          // 去登录页
+          this.$router.push('/login');
         })
         .catch(() => {
           this.$message({
@@ -136,17 +196,17 @@ export default {
   // 计算属性 获取用户信息
   computed: {
     // 获取名字
-    getName(){
-      return this.$store.state.userInfo.name;
+    getName() {
+      return this.$store.state.username;
     },
     // 获取头像
-    getIcon(){
-      return  process.env.VUE_APP_BASEURL+'/'+this.$store.state.userInfo.avatar
+    getIcon() {
+      return process.env.VUE_APP_BASEURL + '/' + this.$store.state.userInfo.avatar
     },
     // 用户角色
-    getRole(){
-      return this.$store.state.userInfo.role;
-    }
+    // getRole(){
+    //   return this.$store.state.userInfo.role;
+    // }
   },
 };
 </script>
@@ -154,45 +214,55 @@ export default {
 <style lang="less">
 .index-container {
   height: 100%;
+
   .header {
     // background-color: orange;
     display: flex;
     justify-content: space-between;
+
     .left {
       display: flex;
       align-items: center;
+
       .el-icon-s-fold {
         font-size: 23px;
         margin-right: 22px;
       }
+
       .logo {
         width: 33px;
         height: 28px;
         margin-right: 11px;
       }
+
       .title {
         font-size: 22px;
         color: #49a1ff;
       }
     }
+
     .right {
       display: flex;
       align-items: center;
+
       .avatar {
         width: 43px;
         height: 43px;
         border-radius: 50%;
         margin-right: 9px;
       }
+
       .name {
         font-size: 14px;
         margin-right: 38px;
       }
     }
   }
+
   .aside {
     // background: skyblue;
   }
+
   .main {
     background-color: hotpink;
   }
@@ -202,10 +272,12 @@ export default {
     width: 200px;
     min-height: 400px;
   }
+
   .el-icon-s-fold {
     font-size: 40px;
     transition: 0.5s;
   }
+
   .rotate {
     transform: rotate(-90deg);
   }

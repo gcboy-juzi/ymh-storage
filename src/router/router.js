@@ -4,16 +4,16 @@ import VueRouter from "vue-router";
 import Vue from "vue";
 
 // 导入Element-ui的弹框
-import { Message } from "element-ui";
+// import { Message } from "element-ui";
 
 // 导入 获取token的方法
-import { getToken } from "../utils/token.js";
+// import { getToken } from "../utils/token.js";
 
 // 导入 获取用户信息的逻辑
-import { userInfo } from "../api/api.js";
+// import { userInfo } from "../api/api.js";
 
 // 导入 仓库
-import store from "../store/store.js";
+// import store from "../store/store.js";
 
 // 重写push方法 屏蔽 重复跳转错误
 // 解决两次访问相同路由地址报错
@@ -103,43 +103,44 @@ const router = new VueRouter({
 });
 
 // 定义白名单(不登陆也可以访问) 后续直接使用性能好一些
-const whitePaths = ["/login"];
+// const whitePaths = ["/login"];
 // 导航守卫
 router.beforeEach((to, from, next) => {
   // 判断是否存在 白名单中 to.path 路径比如 /index /login
   // 白名单 放走
-  if (whitePaths.includes(to.path)===true) {
-    // 放走
-    return next();
-  }
+  // if (whitePaths.includes(to.path)===true) {
+  //   // 放走
+  //   return next();
+  // }
   // 必须登录才可以进去
   // token是否存在的判断
-  if (getToken()) {
-    // 存在
-    // 调用接口验证对错 异步操作
-    return userInfo().then(res => {
-      // 用户信息获取成功 token木有问题
-      store.commit("CHANGEINFO", res.data.data);
-      // 判断状态
-      if(res.data.data.status===0){
-        // 禁用
-        Message.warning("请等待管理员启用你！！");
-        return next("/login");
-      }
-      // 用户启用状态 权限判断
-      if(to.meta.roles.indexOf(res.data.data.role)==-1){
-        // 不存在 说明 没有权限
-        Message.warning("哥们，你不允许访问这个页面");
-        return 
-      }
-      // 放走
-      next();
-    });
-    // return next();
-  }
+  // if (getToken()) {
+  //   // 存在
+  //   // 调用接口验证对错 异步操作
+  //   return userInfo().then(res => {
+  //     // 用户信息获取成功 token木有问题
+  //     store.commit("CHANGEINFO", res.data.content.userId);
+  //     // 判断状态
+  //     // if(res.data.data.status===0){
+  //     //   // 禁用
+  //     //   Message.warning("请等待管理员启用你！！");
+  //     //   return next("/login");
+  //     // }
+  //     // 用户启用状态 权限判断
+  //     // if(to.meta.roles.indexOf(res.data.data.role)==-1){
+  //     //   // 不存在 说明 没有权限
+  //     //   Message.warning("哥们，你不允许访问这个页面");
+  //     //   return 
+  //     // }
+  //     // 放走
+  //     next();
+  //   });
+  //   // return next();
+  // }
   // 没登录，同时木有token
-  Message("请先登录");
-  next("/login");
+  // Message("请先登录");
+  // next("/login");
+   return next();
 });
 
 // 挂载到Vue实例上

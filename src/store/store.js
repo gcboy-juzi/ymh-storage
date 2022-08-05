@@ -9,7 +9,8 @@ const store = new Vuex.Store({
     // 数据
     state:{
         // 用户信息
-        userInfo:undefined
+        userInfo:undefined,
+        username:undefined
     },
     // 修改数据的方法
     mutations:{
@@ -17,7 +18,12 @@ const store = new Vuex.Store({
         CHANGEINFO(state,info){
             // 直接保存
             state.userInfo = info;
-        }
+        },
+        CHANGEUSERNAME(state,info){
+            // 直接保存
+            state.username = info;
+        },
+
     }
 })
 // 暴露出去

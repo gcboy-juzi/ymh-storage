@@ -230,23 +230,22 @@ export default {
           //   },
           //   withCredentials: true
           // })
-
           login({
             username: this.loginForm.username,
             password: this.loginForm.password,
             // code: this.loginForm.captcha
           }).then(res => {
-            if (res.data.success == true) {
+            let result = res.data;
+            if (result.success) {
               // 成功
               this.$message.success("你可算回来啦！");
-            
               // 保存凭证
-              window.localStorage.setItem('mmtoken',res.data.content.userId)
+              window.localStorage.setItem('mmtoken',result.content.userId)
               // 调用工具函数 保存token
-              setToken(res.data.content.userId)
+              setToken(result.content.userId);
               window.console.log(res);
               // 保存用户信息 到仓库中
-              this.$store.commit("CHANGEINFO",res.data.content);
+              this.$store.commit("CHANGEUSERNAME",this.loginForm.username);
                 // 跳转
               this.$router.push('/index');
             } else {
